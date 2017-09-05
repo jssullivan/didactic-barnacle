@@ -1,0 +1,25 @@
+{
+  "name": "didactic-barnacle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jssullivan/didactic-barnacle.git"
+  },
+  "author": "James Sullivan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jssullivan/didactic-barnacle/issues"
+  },
+  "homepage": "https://github.com/jssullivan/didactic-barnacle#readme",
+  "dependencies": {
+    "express": "^4.15.4",
+    "pg": "^7.3.0",
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.4"
+  }
+}
