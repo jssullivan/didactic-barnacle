@@ -31,7 +31,7 @@ GET: `/download/[id]?noHeader=true`: Returns the download if retrieved into the 
 
 ### Future Improvements
 
- - More robust startup script ( ability to start multiple download workers)
+ - More robust startup script (ability to start multiple download workers)
  - File extensions support
- - Ability to check the progress of a download (percentage complete)
+ - Ability to check the progress of a download (percent complete)
  - Tests
