@@ -2,6 +2,7 @@
 
 const express = require('express');
 const fs = require('fs');
+const validUrl = require('valid-url');
 
 const db = require('../modules/db');
 const queue = require('../modules/queue')
@@ -77,8 +78,10 @@ download.get('/:id', function (req, res) {
 download.post('/', function(req, res) {
     let url = req.body.url;
     if (!url) {
-        
         res.status(400).json({status: 'error', error: 'No URL sent'})
+        return;
+    } else if (!validUrl.isUri(url)) {
+        res.status(400).json({status: 'error', error: 'Invalid URL sent'})
         return;
     }
 
@@ -93,7 +96,6 @@ download.post('/', function(req, res) {
         };
         
         return queue.getChannel().then((ch) => {
-
             return ch.assertQueue(queue.queues.downloads, { durable: true }).then(() => {
                 ch.sendToQueue(queue.queues.downloads, new Buffer(JSON.stringify(msg)));
                 
