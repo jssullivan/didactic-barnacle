@@ -1,40 +1,32 @@
 'use strict';
 
-const { Client } = require('pg');
-const Fs = require('fs');
-const Db = new Client();
+const fs = require('fs');
+const db = require('./modules/db.js');
 
-const Downloads = process.env.DOWNLOAD_FOLDER; 
+const downloadsFolder = process.env.DOWNLOAD_FOLDER;
 
 (async () => {
-    await Db.connect();
 
-    console.log("Running init queries on the postgres Database");
-    let queries = [
-        "CREATE TYPE status AS ENUM ('pending', 'successful', 'error');",
-        "CREATE TABLE Downloads( \
-            ID serial PRIMARY KEY, \
-            STATUS status NOT NULL, \
-            FILE TEXT \
-            );",
-    ]
+    console.log('Creating Tables in the Database');
+    let dbPromise = db.schema.createTable('downloads', (table) => {
+        table.increments();
+        table.enu('status', ['pending', 'success', 'error']);
+        table.text('url'),
+        table.text('file'),
+        table.text('content_type')
+        table.timestamp('creation_date');
+    });
 
-    try {
-        for (let query of queries ) {
-            await Db.query(query);
-        };
-    } catch (ex) {
-        console.error("Error in initiliazing the Database")
-        console.error(ex);
-    }
-
-    console.log(`Creating Downloads Folder at ${Downloads}`);
-    if (!Fs.existsSync(Downloads)) {
-        Fs.mkdirSync(Downloads);
+    console.log(`Creating Downloads Folder at ${downloadsFolder}`);
+    if (!fs.existsSync(downloadsFolder)) {
+        fs.mkdirSync(downloadsFolder);
     } else {
-        console.error(`${Downloads} already exists, collisions in file names will result in data loss`);        
+        console.error(`${downloadsFolder} already exists, collisions in file names will result in data loss`);        
     }
 
-    let connectionEnd = Db.end();    
-    console.log("Initialization Complete");
+    // Make sure we have created the Downloads Table before exiting the script (Making the Folder is run synchonrously)
+    dbPromise.then(() => {
+        console.log('Initialization Complete');        
+        process.exit();        
+    }) 
 })();
