@@ -24,7 +24,7 @@ const downloadsFolder = process.env.DOWNLOAD_FOLDER;
         console.error(`${downloadsFolder} already exists, collisions in file names will result in data loss`);        
     }
 
-    // Make sure we have created the Downloads Table before exiting the script (Making the Folder is run synchonrously)
+    // Make sure the Downloads Table was created before exiting the script (the downloads folder was made synchonrously)
     dbPromise.then(() => {
         console.log('Initialization Complete');        
         process.exit();        

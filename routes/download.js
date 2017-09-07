@@ -12,7 +12,7 @@ const downloadsFolder = process.env.DOWNLOAD_FOLDER;
 let download = express();
 
 // Get the status of all Downloads
-download.get('/', function(req, res) {
+download.get('/', function(req, res) {    
     db.table('downloads').select('id', 'status', 'url').then((data) => {
 
         res.json({status: 'success', data: data});
