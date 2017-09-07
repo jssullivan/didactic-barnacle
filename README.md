@@ -2,11 +2,11 @@
 
 This is a simple REST API that allows for adding downloads to a remote host. This web service requires RabbitMQ and MySQL to correctly function.
 
-###Setup
+### Setup
 
 First edit the provided `.env` file filling in the necessary credentials for the MySQL and RabbitMQ services, and make sure these environmental variables are set before running `didactic-barnacle`.
 
-####To initialize, run:
+#### To initialize, run:
 
     npm install
     npm run init
