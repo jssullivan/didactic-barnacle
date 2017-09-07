@@ -23,11 +23,11 @@ GET: `/download/`: Returns the statuses of all downloads.
 
 POST: `/download/`: Adds a download to the queue returning the download id. Post using content-type: `application/x-www-form-urlencoded` with the body containing the key `url` whose value is the url you wish to download.
 
-GET: `download/[id]/status`: Returns the status of a specific download specified by id.
+GET: `/download/[id]/status`: Returns the status of a specific download specified by id.
 
-GET: `download/[id]/`: Returns the download if retrieved, otherwise redirects to `download/[id]/status`.
+GET: `/download/[id]/`: Returns the download if retrieved, otherwise redirects to `download/[id]/status`.
 
-GET: `download/[id]?noHeader=true`: Returns the download if retrieved into the browser as raw text (instead of the content-type found when retrieving the download), otherwise redirects to `download/[id]/status`
+GET: `/download/[id]?noHeader=true`: Returns the download if retrieved into the browser as raw text (instead of the content-type found when retrieving the download), otherwise redirects to `download/[id]/status`
 
 ### Future Improvements
 
