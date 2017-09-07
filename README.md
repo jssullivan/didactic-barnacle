@@ -33,5 +33,5 @@ GET: `download/[id]?noHeader=true`: Returns the download if retrieved into the b
 
  - More robust startup script ( ability to start multiple download workers)
  - File extensions support
- - Ability to check the progress of a download
+ - Ability to check the progress of a download (percentage complete)
  - Tests
